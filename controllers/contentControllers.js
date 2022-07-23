@@ -2,7 +2,9 @@ const quests= require('../models/questions')
 const Notes = require('../models/notes')
 const CompletedQuestions = require('../models/completedquestions')
 const LikedQuestions = require('../models/likedquestions')
-
+const Users = require('../models/users')
+const AcademicData = require('../models/academicdatas')
+const users = require('../models/users')
 
 module.exports.striverSheet = async(req,res) =>{
     const q = await quests.find({})
@@ -158,4 +160,115 @@ module.exports.likeQuestion = async (req,res)=>{
     else 
         message=false
     res.json({message})
+}
+
+module.exports.likedQuestionsEndPoint = async (req,res) =>{
+
+    if(!res.locals.isAuthenticated)
+    {   
+        return res.redirect('/login')
+    }
+
+    let currUser = res.locals.user 
+    let allLikedQuestionsByThisUser = await LikedQuestions.find({email:currUser})
+    let allLikedQuestionsNames=[]
+    
+    for(let i=0;i<allLikedQuestionsByThisUser.length;++i)
+        allLikedQuestionsNames.push( await quests.findOne({qid:allLikedQuestionsByThisUser[i].qid}) )
+    console.log(allLikedQuestionsNames)
+    res.render('likedQuestions',{allLikedQuestions:allLikedQuestionsNames})
+  
+}
+
+function myComp(a,b)
+{
+    return b.questionsDoneByThisUser-a.questionsDoneByThisUser
+}
+
+module.exports.leaderboard = async (req,res) =>{
+    let allUsers = await Users.find({})
+    let usersAndNumberOfQuestionsTheySolved = []
+    
+    for(let i=0;i<allUsers.length;++i)
+    {
+        let userName = allUsers[i].name 
+        let questionsDoneByThisUser = (await CompletedQuestions.find({email:allUsers[i].email})).length 
+        let college = await AcademicData.findOne({email:allUsers[i].email})
+        if(!college)
+            college="NA"
+        else
+            college=college.college
+        console.log(college)
+        usersAndNumberOfQuestionsTheySolved.push({userName,questionsDoneByThisUser,percentageDone: (100*questionsDoneByThisUser/185).toFixed(0),college})
+    }
+
+    usersAndNumberOfQuestionsTheySolved=usersAndNumberOfQuestionsTheySolved.sort(myComp)
+    res.render('leaderboard',{usersAndNumberOfQuestionsTheySolved})
+}
+
+module.exports.userAccount  = async (req,res) =>{
+    
+    if(!res.locals.isAuthenticated)
+    {   
+        return res.redirect('/login')
+    }
+
+    let currUser = await users.findOne({email:res.locals.user})
+    let name=currUser.name 
+    let email=currUser.email 
+    let password=currUser.password 
+
+    let college="NA"
+    let country="NA"
+    let company="NA"
+    let phone="NA"
+
+    let currAcademicData = await AcademicData.findOne({email:email}) 
+
+    if(currAcademicData){
+         college=currAcademicData.college 
+         country=currAcademicData.country 
+         company=currAcademicData.company 
+         phone=currAcademicData.phone 
+    }
+    res.render('account',{name,email,password,college,country,company,phone})
+}
+
+module.exports.saveAcademicData = async (req,res)=>{
+
+    if(!res.locals.isAuthenticated)
+    {   
+        return res.json({error:"Please login to save your progress."})
+    }
+
+    try{
+
+        let {country,company,college,phone}=req.body
+        
+        let currAcademicData=await AcademicData.findOne({email:res.locals.user})
+        // console.log(country+" "+company+" "+college+" "+phone)
+        if(!currAcademicData)
+        {
+            await AcademicData.create({email:res.locals.user,country,company,college,phone})
+        }
+        else
+        {        
+            await AcademicData.findOneAndUpdate(
+                {
+                    email:res.locals.user
+                },
+                {
+                    "$set":{country,company,college,phone}
+                }
+            )
+
+        }
+        return res.json({success:"Data updated successfully."})
+    }
+    catch(e){
+        console.log(e)
+        return res.json({error:"Something went wrong."})
+    }
+
+
 }

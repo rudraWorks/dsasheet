@@ -1,0 +1,32 @@
+<%- include('./partials/upper.ejs') %>
+<style>
+    .leaderBoard{
+        display: flex;
+        flex-direction: column;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+    .leaderBoard>div{
+        display: flex;
+        padding: 5px;
+        background-color: aliceblue;
+        border: 1px dashed black;
+        margin: 5px;
+    }
+    .leaderBoard>div>span{
+        margin-right: 10px;
+    }
+</style>
+<h1 style="text-align: center;margin-top: 30px;">Leaderboard</h1>
+<div class="leaderBoard">
+
+    <% for(let i=0;i<usersAndNumberOfQuestionsTheySolved.length;++i) { %>
+    <div><%= usersAndNumberOfQuestionsTheySolved[i].userName %> &nbsp;&nbsp;&nbsp; <i> ( <%= usersAndNumberOfQuestionsTheySolved[i].college %> )</i> <span style="margin-left: auto;"> <%= usersAndNumberOfQuestionsTheySolved[i].questionsDoneByThisUser %>/185</span> <progress value="<%= usersAndNumberOfQuestionsTheySolved[i].percentageDone %>" max="100"></progress></div>
+    <% } %>
+
+</div>
+
+<%- include('./partials/lower.ejs') %>
+
+
+

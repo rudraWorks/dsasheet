@@ -35,7 +35,8 @@
         height: 100vh;
         overflow-y: scroll;
         border: 1px solid black;
-        margin-top: 20px;
+        margin-right: 5px;
+        margin-left: 5px;
     }
     .categoryInnerContainer{
         display: flex;
@@ -83,7 +84,6 @@
         align-items: center;
         background-color: #06344a;
         flex-wrap: wrap;
-        margin-bottom: 40px;
     }
 
     .topicHeading{
@@ -160,11 +160,6 @@
       
     }
 
-    #striver{
-            text-align: center;
-            font-size: 50px;
-            margin-top: 40px;
-        }
 
     .statusBar{
         display: none;
@@ -191,15 +186,17 @@
                     grid-area: a;
                     display: flex;
                     flex-direction: column;
-                    background: #b9d1f9;
+                    background: aliceblue;
                     border: 1px solid black;
-                    margin-top: 20px;
                     overflow-y: scroll;
                     height: 100vh;
                     overflow-x: hidden;
+                    margin-left: 10px;
+                    margin-right: 0px;
                 }
                 .individualQuestionsContainer{
                     grid-area: b;
+                    margin-left: 10px;
                 }
 
                 .statusBar>div{
@@ -215,16 +212,81 @@
                 .statusBar>div>h3{
                     color: rgb(31, 6, 71);
                     font-weight: 600;
+                    font-size: 20px;
                 }
     }
 
+    #striver{
+            height: 200px;
+            display: grid;
+                        grid-template-columns: repeat(12,1fr);
+                        grid-template-rows:1fr 1fr;
+                        grid-template-areas:"a a b b b b b b b b b b"
+                                            "a a b b b b b b b b b b";
+                        grid-gap: 0px;
+                        justify-content: center;
+                        justify-content: center;
 
+            margin: 10px;
+        }
+    #progressBar{
+        text-align: center;
+        font-size: 40px;
+        grid-area: b;
+        border: 1px dashed black;
+        margin-left: 5px;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #toppersAndLikedQuestions{
+        grid-area: a;
+        border: 1px dashed black;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #toppersAndLikedQuestions>button{
+        margin: 10px;
+    }
+    @media (max-width: 768px) {
+
+        #striver{
+                        height: 250px;
+                        grid-template-columns: repeat(6,1fr);
+                        grid-template-rows:1fr 1fr 1fr 1fr;
+                        grid-template-areas:"a a a a a a"
+                                            "a a a a a a"
+                                            "a a a a a a"
+                                            "b b b b b b";
+        }
+        #toppersAndLikedQuestions{
+            grid-area: b;
+            flex-direction: row;
+        }
+        #progressBar{
+            grid-area: a;
+            font-size: 30px;
+            margin-left: 0;
+            margin-bottom: 5px;
+        }
+    }
 </style>
 
-<div id="striver">< Striver DSA Sheet />
-    <br>
-    <h3> You have solved <span style="color: red;"><%= totalCompletedQuestions %> </span>questions out of 185. (<%= percentageOfQuestionsDone %>% Completed)</h3>
-    <progress type="range" value="<%= percentageOfQuestionsDone %>" max="100"></progress>
+<div id="striver">
+    <div id="toppersAndLikedQuestions">
+        <button onclick="location.href='/leaderboard'" type="button" class="btn btn-primary" type="submit">Leaderboard</button>
+        <button onclick="location.href='/likedQuestions'" type="button" class="btn btn-primary" type="submit">Liked Questions</button>
+    </div>
+    <div id="progressBar">
+        <div>< Striver DSA Sheet /></div>
+        <h3> You have solved <span style="color: red;"><%= totalCompletedQuestions %> </span>questions out of 185. (<%= percentageOfQuestionsDone %>% Completed)</h3>
+        <progress type="range" value="<%= percentageOfQuestionsDone %>" max="100"></progress>
+    </div>
 </div>
 <div class="statusBarPlusIndividualQuestionsContainer">
 

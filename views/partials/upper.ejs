@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Grape+Nuts&family=Indie+Flower&family=Monoton&family=Press+Start+2P&family=Quicksand:wght@300&family=Slackey&family=Special+Elite&family=Tourney:wght@100&family=Zilla+Slab:wght@300&display=swap" rel="stylesheet">    
-   
+    <!-- <script src="../toastMessage.js"></script> -->
     <title>Hello, world!</title>
     <style>
     *{
@@ -37,7 +37,7 @@
 
     .individualQuestionsContainer::-webkit-scrollbar-thumb
     {
-      background-color: #000000;	
+      background-color: #555151;	
     }
 
     /* status bar */
@@ -55,7 +55,26 @@
 
     .statusBar::-webkit-scrollbar-thumb
     {
-      background-color: #000000;	
+      background-color: #555151;	
+    }
+
+    
+    /* body  */
+    body::-webkit-scrollbar-track
+    {
+      border: 1px solid black;
+      background-color: #F5F5F5;
+    }
+
+    body::-webkit-scrollbar
+    {
+      width: 10px;
+      background-color: #F5F5F5;
+    }
+
+    body::-webkit-scrollbar-thumb
+    {
+      background-color: #555151;	
     }
     body{
       height: 100%;
@@ -83,7 +102,7 @@
           </ul>
           <% if(typeof user!='undefined' && user) {%>
            
-              <a class="nav-link" style="color: white;" disabled><%= user %></a>
+            <a href="/account"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Account</button></a>
            
            &nbsp;&nbsp;
           <a href="/logout"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button></a>
