@@ -12,9 +12,10 @@ module.exports.striverSheet = async(req,res) =>{
     let trieDone=0,graphDone=0,bstDone=0,btDone=0,stringDone=0,sqDone=0,heapDone=0,bsDone=0,recBackDone=0,recDone=0,greedyDone=0,arrLLDone=0,LLDone=0,arrDone=0,dpDone=0 
 
     let questionsDoneInEachCategory=[arrDone,LLDone,arrLLDone,greedyDone,recDone,recBackDone,bsDone,sqDone,heapDone,btDone,bstDone,graphDone,dpDone,trieDone,stringDone]
+    let numberOfQuestionsDoneInEachCategory=[...questionsDoneInEachCategory]
 
     if(!res.locals.isAuthenticated)
-    return res.render('striverSheet',{que:q,doneArr:[],likedQuestionsArr:[],questionsDoneInEachCategory,totalCompletedQuestions:0,percentageOfQuestionsDone:0})
+    return res.render('striverSheet',{que:q,doneArr:[],likedQuestionsArr:[],questionsDoneInEachCategory,totalCompletedQuestions:0,percentageOfQuestionsDone:0,numberOfQuestionsDoneInEachCategory})
 
     let fetchedCompletedQuestions = await CompletedQuestions.find({email:res.locals.user})
     let totalCompletedQuestions = fetchedCompletedQuestions.length
@@ -62,12 +63,13 @@ module.exports.striverSheet = async(req,res) =>{
     likedQuestionsArr.push(fetchedLikedQuestions[i].qid)
     //trie-7, dp-15, graph-11, bst-22, bt-27, string-12, sq-17, heap-6, bs-8, rec&back-6, rec-6, greedy-6, a&l-6, ll-12,arr-24   
 
-    questionsDoneInEachCategory=[100*arrDone/24,100*LLDone/12,100*arrLLDone/6,100*greedyDone/6,100*recDone/6,100*recBackDone/6,100*bsDone/8,100*sqDone/17,100*heapDone/6,100*btDone/27,100*bstDone/22,100*graphDone/11,100*dpDone/15,100*trieDone/7,100*stringDone/26]
-
+    questionsDoneInEachCategory=[100*arrDone/24,100*LLDone/12,100*arrLLDone/6,100*greedyDone/6,100*recDone/6,100*recBackDone/6,100*bsDone/8,100*sqDone/17,100*heapDone/6,100*btDone/27,100*bstDone/22,100*graphDone/11,100*dpDone/15,100*trieDone/7,100*stringDone/12]
+    numberOfQuestionsDoneInEachCategory=[arrDone,LLDone,arrLLDone,greedyDone,recDone,recBackDone,bsDone,sqDone,heapDone,btDone,bstDone,graphDone,dpDone,trieDone,stringDone]
+   
     for(let i=0;i<questionsDoneInEachCategory.length;++i)
         questionsDoneInEachCategory[i]=questionsDoneInEachCategory[i].toFixed(0)
     console.log(questionsDoneInEachCategory)
-    res.render('striverSheet',{que:q,doneArr,likedQuestionsArr,questionsDoneInEachCategory,totalCompletedQuestions,percentageOfQuestionsDone:(100*totalCompletedQuestions/185).toFixed(0)})
+    res.render('striverSheet',{que:q,doneArr,likedQuestionsArr,questionsDoneInEachCategory,totalCompletedQuestions,percentageOfQuestionsDone:(100*totalCompletedQuestions/185).toFixed(0),numberOfQuestionsDoneInEachCategory})
 }
 
 module.exports.checkQuestion = async (req,res) => {
