@@ -10,6 +10,10 @@ module.exports.striverSheet = async(req,res) =>{
     const q = await quests.find({})
     
 
+    let hashMap={}
+    for(let i=0;i<q.length;++i)
+        hashMap[q[i].qid]=q[i].cat
+
 
     let trieDone=0,graphDone=0,bstDone=0,btDone=0,stringDone=0,sqDone=0,heapDone=0,bsDone=0,recBackDone=0,recDone=0,greedyDone=0,arrLLDone=0,LLDone=0,arrDone=0,dpDone=0 
 
@@ -25,9 +29,9 @@ module.exports.striverSheet = async(req,res) =>{
     for(let i=0;i<fetchedCompletedQuestions.length;++i)
     {
         doneArr.push(fetchedCompletedQuestions[i].qid)
-        let questionCategory= (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat
+        // let questionCategory= (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat
 
-
+        let questionCategory = hashMap[fetchedCompletedQuestions[i].qid]
 
         if(questionCategory=='array')
             ++arrDone 
