@@ -77,39 +77,50 @@
       background-color: #555151;	
     }
     body{
-      height: 100%;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
+    footer {
+      padding: 3px;
+      background-color:  rgb(52 58 64);
+      color: white;
+      margin-top: auto;
+     
+    }
+
     </style>
   </head>
   <body style="background-color: white;" >
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary myNav" >
-        <a class="navbar-brand" href="#">Focussed</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
-              <a class="nav-link" href="/">Home </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="/about">About Us </a>
-            </li>
-          
-          </ul>
-          <% if(typeof user!='undefined' && user) {%>
-           
-            <a href="/account"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Account</button></a>
-           
-           &nbsp;&nbsp;
-          <a href="/logout"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button></a>
 
-          <% } else{ %>
-          <a href="/login"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button></a>&nbsp;&nbsp;
-          <a href="/signup"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Signup</button></a>
-          <% } %>
-        </div>
-      </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark myNav" >
+            <a class="navbar-brand" href="/">Focussed</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                  <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/about">About Us </a>
+                </li>
+              
+              </ul>
+              <% if(typeof user!='undefined' && user) {%>
+              
+                <a href="/account"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Account</button></a>
+              
+              &nbsp;&nbsp;
+              <a href="/logout"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button></a>
+
+              <% } else{ %>
+              <a href="/login"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button></a>&nbsp;&nbsp;
+              <a href="/signup"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Signup</button></a>
+              <% } %>
+            </div>
+          </nav>
 
