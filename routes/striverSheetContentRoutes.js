@@ -1,4 +1,4 @@
-const contentControllers = require('../controllers/contentControllers')
+const contentControllers = require('../controllers/striverSheetContentControllers')
 const {Router}  = require('express')
 
 const contentRouter = Router() 
