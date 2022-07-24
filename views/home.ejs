@@ -23,25 +23,36 @@
         background-repeat: no-repeat;
         height:100%;
     }
+    #imageOS{
+        background-image: url('https://howandwhat.net/wp-content/uploads/2017/07/Operating-system-300x235.jpg');
+        background-size: contain;
+        background-color:rgb(255, 255, 255);
+        background-repeat: no-repeat;
+        height:100%;
+    }
 </style>
 <center>
     
-    <h1 style="color: white;">All Tracks</h1>
+    <h1 style="color: rgb(0, 0, 0); text-align: center;margin-top: 30px; font-weight: 900;">All Tracks</h1>
+    <hr>
     <div class="itemContainer">
       
         <div class="mainItems" id="striverDSASheet" onclick="location.href='/striverSheet'">
             <div>Striver DSA Sheet</div>
             <div id="imageDSA"></div>
         </div>
-        <div class="mainItems" onclick="toastMessage('Coming soon!')" id="striverDSASheet">
+        <div class="mainItems" onclick="toastMessage('Coming soon!')">
             <div>C++ Interview Questions</div>
             <div id="imageCPP"></div>
         </div>
-        <div class="mainItems" onclick="toastMessage('Coming soon!')"  id="striverDSASheet">
+        <div class="mainItems" onclick="toastMessage('Coming soon!')">
             <div>Computer Networks</div>
             <div id="imageCN"></div>
         </div>
-
+        <div class="mainItems" onclick="toastMessage('Coming soon!')">
+            <div>Operating Systems</div>
+            <div id="imageOS"></div>
+        </div>
 
     </div>
 
