@@ -9,7 +9,7 @@
     margin-bottom: 50px;
 }
 .mainItems{
-    border: 1px solid rgb(0, 0, 0);
+    /* border: 1px solid rgb(0, 0, 0); */
     margin: 20px;
     width: 290px;
     height:290px;
@@ -23,6 +23,6 @@
     background-color: rgb(8, 3, 56);
     font-size: 25px;
     padding:5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     color: white;
 }
