@@ -28,10 +28,11 @@
     }
 </style>
     <h1 style="text-align: center; margin: 40px;">Account Data</h1>
+    <a style="margin-left: 35px;" href="/striverSheet">back</a>
+
     <div class="accountData">
         <div><span>Name:</span><%= name %> </div>
         <div><span>Email:</span><%= email %></div>
-        <div><span>Password:</span><%= password%></div>
         <div><span>Country:</span><%= country %> <div><input id="country" value="<%= country %>"></div> </div>
         <div><span>Company:</span><%= company %> <div><input id="company" value="<%= company %>"></div> </div>
         <div><span>College:</span><%= college %> <div><input id="college" value="<%= college %>"></div> </div>
@@ -67,6 +68,8 @@
             let college=document.getElementById('college').value.trim()
             let phone=document.getElementById('phone').value.trim()
 
+            if(country=="" || company =="" || college=="" || phone=="")
+            return toastMessage("Input fields can not be empty!")
             try{
 
                 let data=await fetch('saveAcademicData',{

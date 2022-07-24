@@ -1,19 +1,67 @@
 <%- include('./partials/upper.ejs') %>
 
 <link rel="stylesheet" href="homeStyle.css">
+<style>
+    #imageDSA{
+        background-image: url('https://cdn.programiz.com/sites/tutorial2program/files/tree_0.png');
+        background-size: contain;
+        background-color:aquamarine;
+        background-repeat: no-repeat;
+        height:100%;
+    }
+    #imageCN{
+        background-image: url('https://www.tutorialspoint.com/computer_fundamentals/images/computer_networks.jpg');
+        background-size: contain;
+        background-color:rgb(255, 255, 255);
+        background-repeat: no-repeat;
+        height:100%;
+    }
+    #imageCPP{
+        background-image: url('https://miro.medium.com/max/1000/1*BNtMfCtElm678SLZL8tPrQ.png');
+        background-size: contain;
+        background-color:rgb(255, 255, 255);
+        background-repeat: no-repeat;
+        height:100%;
+    }
+</style>
 <center>
     
     <h1 style="color: white;">All Tracks</h1>
     <div class="itemContainer">
       
-        <div class="mainItems" onclick="location.href='/striverSheet'">Striver Sheet</div>
-        <div class="mainItems">aptitude</div>
-        <div class="mainItems">puzzles</div>
-        <div class="mainItems">c++ interview questions</div>
+        <div class="mainItems" id="striverDSASheet" onclick="location.href='/striverSheet'">
+            <div>Striver DSA Sheet</div>
+            <div id="imageDSA"></div>
+        </div>
+        <div class="mainItems" onclick="toastMessage('Coming soon!')" id="striverDSASheet">
+            <div>C++ Interview Questions</div>
+            <div id="imageCPP"></div>
+        </div>
+        <div class="mainItems" onclick="toastMessage('Coming soon!')"  id="striverDSASheet">
+            <div>Computer Networks</div>
+            <div id="imageCN"></div>
+        </div>
 
 
     </div>
 
 </center>
 
+<script>
+        function toastMessage(message){
+                return Toastify({
+                        text:message,
+                        duration: 3000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                            background:"linear-gradient(to right, #00b09b, #96c93d)",
+                        },
+                        onClick: function(){} // Callback after click
+                        }).showToast();
+                    }
+</script>
 <%- include('./partials/lower.ejs') %>

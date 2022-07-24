@@ -70,7 +70,6 @@ module.exports.striverSheet = async(req,res) =>{
    
     for(let i=0;i<questionsDoneInEachCategory.length;++i)
         questionsDoneInEachCategory[i]=questionsDoneInEachCategory[i].toFixed(0)
-    console.log(questionsDoneInEachCategory)
     res.render('striverSheet',{que:q,doneArr,likedQuestionsArr,questionsDoneInEachCategory,totalCompletedQuestions,percentageOfQuestionsDone:(100*totalCompletedQuestions/185).toFixed(0),numberOfQuestionsDoneInEachCategory})
 }
 
@@ -114,7 +113,6 @@ module.exports.saveNote = async (req,res)=>{
     return res.json({error:"Please login!"})
     let {qid,noteToBeSaved}=req.body 
 
-    console.log(qid+" "+res.locals.user)
     let fetchedNote=await Notes.findOneAndUpdate(
         {
             qid:qid,
@@ -175,7 +173,6 @@ module.exports.likedQuestionsEndPoint = async (req,res) =>{
     
     for(let i=0;i<allLikedQuestionsByThisUser.length;++i)
         allLikedQuestionsNames.push( await quests.findOne({qid:allLikedQuestionsByThisUser[i].qid}) )
-    console.log(allLikedQuestionsNames)
     res.render('likedQuestions',{allLikedQuestions:allLikedQuestionsNames})
   
 }
@@ -198,7 +195,6 @@ module.exports.leaderboard = async (req,res) =>{
             college="NA"
         else
             college=college.college
-        console.log(college)
         usersAndNumberOfQuestionsTheySolved.push({userName,questionsDoneByThisUser,percentageDone: (100*questionsDoneByThisUser/185).toFixed(0),college})
     }
 
@@ -246,7 +242,6 @@ module.exports.saveAcademicData = async (req,res)=>{
         let {country,company,college,phone}=req.body
         
         let currAcademicData=await AcademicData.findOne({email:res.locals.user})
-        // console.log(country+" "+company+" "+college+" "+phone)
         if(!currAcademicData)
         {
             await AcademicData.create({email:res.locals.user,country,company,college,phone})
@@ -266,7 +261,6 @@ module.exports.saveAcademicData = async (req,res)=>{
         return res.json({success:"Data updated successfully."})
     }
     catch(e){
-        console.log(e)
         return res.json({error:"Something went wrong."})
     }
 

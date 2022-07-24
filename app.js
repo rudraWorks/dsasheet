@@ -1,19 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-const users = require('./models/users')
 const router = require('./routes/authRoutes')
 const {checkUser} = require('./middlewares/userAuth')
 const contentRouter = require('./routes/contentRoutes')
 
-// const DB = 'mongodb+srv://srudra754:test123@cluster0.zey6y.mongodb.net/smartstudy?retryWrites=true&w=majority'
-const DB = 'mongodb://localhost:27017/dsasheets'
+const DB = 'mongodb+srv://srudra754:test123@cluster0.zey6y.mongodb.net/smartstudy?retryWrites=true&w=majority'
+// const DB = 'mongodb://localhost:27017/dsasheets'
 mongoose.connect(DB,()=>{
     console.log('connected to db')
 }) 
-  
-const app = express()
-
+   
+const app = express() 
+ 
 app.set('view engine','ejs')
 
 app.use(express.json())
