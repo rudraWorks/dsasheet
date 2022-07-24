@@ -25,37 +25,37 @@ module.exports.striverSheet = async(req,res) =>{
     for(let i=0;i<fetchedCompletedQuestions.length;++i)
     {
         doneArr.push(fetchedCompletedQuestions[i].qid)
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='array')
-            ++arrDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='linkedList')
-            ++LLDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='linkedListAndArrays')
-            ++arrLLDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='greedy')
-            ++greedyDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='recursion')
-            ++recDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='recursionAndBacktracking')
-            ++recBackDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='binarySearch')
-            ++bsDone
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='array')
+        //     ++arrDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='linkedList')
+        //     ++LLDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='linkedListAndArrays')
+        //     ++arrLLDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='greedy')
+        //     ++greedyDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='recursion')
+        //     ++recDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='recursionAndBacktracking')
+        //     ++recBackDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='binarySearch')
+        //     ++bsDone
         
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='heap')
-            ++heapDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='stackAndQueue')
-            ++sqDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='binaryTree')
-            ++btDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='binarySearchTree')
-            ++bstDone 
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='graph')
-            ++graphDone
-        if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='dp')
-            ++dpDone
-        if( (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='trie')
-            ++trieDone
-        if( (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='string')
-         ++stringDone
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='heap')
+        //     ++heapDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='stackAndQueue')
+        //     ++sqDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='binaryTree')
+        //     ++btDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='binarySearchTree')
+        //     ++bstDone 
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='graph')
+        //     ++graphDone
+        // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='dp')
+        //     ++dpDone
+        // if( (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='trie')
+        //     ++trieDone
+        // if( (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='string')
+        //  ++stringDone
             
     }
     
