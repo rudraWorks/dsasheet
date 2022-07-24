@@ -25,6 +25,43 @@ module.exports.striverSheet = async(req,res) =>{
     for(let i=0;i<fetchedCompletedQuestions.length;++i)
     {
         doneArr.push(fetchedCompletedQuestions[i].qid)
+        let questionCategory= (await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat
+
+
+
+        if(questionCategory=='array')
+            ++arrDone 
+        else if(questionCategory=='linkedList')
+            ++LLDone 
+        else if(questionCategory=='linkedListAndArrays')
+            ++arrLLDone 
+        else if(questionCategory=='greedy')
+            ++greedyDone 
+        else if(questionCategory=='recursion')
+            ++recDone 
+        else if(questionCategory=='recursionAndBacktracking')
+            ++recBackDone 
+        else if(questionCategory=='binarySearch')
+            ++bsDone
+        
+        else if(questionCategory=='heap')
+            ++heapDone 
+        else if(questionCategory=='stackAndQueue')
+            ++sqDone 
+        else if(questionCategory=='binaryTree')
+            ++btDone 
+        else if(questionCategory=='binarySearchTree')
+            ++bstDone 
+        else if(questionCategory=='graph')
+            ++graphDone
+        else if(questionCategory=='dp')
+            ++dpDone
+        else if( questionCategory=='trie')
+            ++trieDone
+        else if( questionCategory=='string')
+        ++stringDone
+
+
         // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='array')
         //     ++arrDone 
         // if((await quests.findOne({qid:fetchedCompletedQuestions[i].qid})).cat=='linkedList')
