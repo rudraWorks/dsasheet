@@ -32,7 +32,7 @@ app.get('/',(req,res)=>{
 
     // if(!res.locals.isAuthenticated)
     // return res.send('please authorize yourself!')
-    
+    res.locals.pageTitle="All tracks"
     res.render('home')
 })
 

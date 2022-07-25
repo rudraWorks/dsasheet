@@ -12,15 +12,18 @@ module.exports.login_get=(req,res)=>{
     if(res.locals.isAuthenticated)
     return res.redirect('/')
 
+    res.locals.pageTitle="Login"
     res.render('login')
 }
 
 
 module.exports.signup_get=(req,res)=>{
+    
 
     if(res.locals.isAuthenticated)
     return res.redirect('/')
 
+    res.locals.pageTitle="Signup"
     res.render('signup')
 }
 

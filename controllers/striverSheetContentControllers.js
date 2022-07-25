@@ -9,7 +9,7 @@ const users = require('../models/users')
 module.exports.striverSheet = async(req,res) =>{
     const q = await quests.find({})
     
-
+    res.locals.pageTitle="Striver Sheet"
     let hashMap={}
     for(let i=0;i<q.length;++i)
         hashMap[q[i].qid]=q[i].cat
@@ -208,6 +208,8 @@ module.exports.likedQuestionsEndPoint = async (req,res) =>{
         return res.redirect('/login')
     }
 
+    res.locals.pageTitle="My liked questions"
+
     let currUser = res.locals.user 
     let allLikedQuestionsByThisUser = await LikedQuestions.find({email:currUser})
     let allLikedQuestionsNames=[]
@@ -227,6 +229,8 @@ module.exports.leaderboard = async (req,res) =>{
     let allUsers = await Users.find({})
     let usersAndNumberOfQuestionsTheySolved = []
     
+    res.locals.pageTitle="Leaderboard"
+
     for(let i=0;i<allUsers.length;++i)
     {
         let userName = allUsers[i].name 
@@ -250,6 +254,7 @@ module.exports.userAccount  = async (req,res) =>{
         return res.redirect('/login')
     }
 
+    res.locals.pageTitle="Account- "+res.locals.user
     let currUser = await users.findOne({email:res.locals.user})
     let name=currUser.name 
     let email=currUser.email 

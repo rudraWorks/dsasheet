@@ -2,7 +2,8 @@ const jwt=require('jsonwebtoken')
 const User = require('../models/users')
 
 module.exports.checkUser = (req,res,next) =>{
-
+    
+    res.locals.pageTitle="Focussed" // default page title
     let token = req.cookies.jwt 
     if(token)
     {
