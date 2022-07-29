@@ -232,6 +232,12 @@ function myComp(a,b)
 
 module.exports.leaderboard = async (req,res) =>{
     let allUsers = await Users.find({})
+
+    let allAcademicData = await AcademicData.find({}) 
+    let academicDataMap={}
+    for(let i=0;i<allAcademicData.length;++i)
+    academicDataMap[allAcademicData[i].email]=allAcademicData[i] 
+
     let usersAndNumberOfQuestionsTheySolved = []
     
     res.locals.pageTitle="Leaderboard"
@@ -240,7 +246,8 @@ module.exports.leaderboard = async (req,res) =>{
     {
         let userName = allUsers[i].name 
         let questionsDoneByThisUser = (await CompletedQuestions.find({email:allUsers[i].email})).length 
-        let college = await AcademicData.findOne({email:allUsers[i].email})
+        // let college = await AcademicData.findOne({email:allUsers[i].email})
+        let college = academicDataMap[allUsers[i].email]
         if(!college)
             college="NA"
         else
