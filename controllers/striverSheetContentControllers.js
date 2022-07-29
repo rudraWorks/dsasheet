@@ -238,14 +238,27 @@ module.exports.leaderboard = async (req,res) =>{
     for(let i=0;i<allAcademicData.length;++i)
     academicDataMap[allAcademicData[i].email]=allAcademicData[i] 
 
+
+    let allCompletedQuestions = await CompletedQuestions.find({}) 
+    let completedQuestionsMap={}
+    for(let i=0;i<allCompletedQuestions.length;++i)
+    completedQuestionsMap[allCompletedQuestions[i].email]=0;
+
+    for(let i=0;i<allCompletedQuestions.length;++i)
+    {
+        completedQuestionsMap[allCompletedQuestions[i].email]+=1
+    }
     let usersAndNumberOfQuestionsTheySolved = []
     
     res.locals.pageTitle="Leaderboard"
 
     for(let i=0;i<allUsers.length;++i)
-    {
+    { 
         let userName = allUsers[i].name 
-        let questionsDoneByThisUser = (await CompletedQuestions.find({email:allUsers[i].email})).length 
+        // let questionsDoneByThisUser = (await CompletedQuestions.find({email:allUsers[i].email})).length 
+        let questionsDoneByThisUser = completedQuestionsMap[allUsers[i].email]
+        if(!questionsDoneByThisUser)questionsDoneByThisUser=0
+        // console.log(questionsDoneByThisUser)
         // let college = await AcademicData.findOne({email:allUsers[i].email})
         let college = academicDataMap[allUsers[i].email]
         if(!college)
