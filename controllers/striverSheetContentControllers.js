@@ -212,10 +212,15 @@ module.exports.likedQuestionsEndPoint = async (req,res) =>{
 
     let currUser = res.locals.user 
     let allLikedQuestionsByThisUser = await LikedQuestions.find({email:currUser})
+    let allQuestions = await quests.find({})
+    let questsMap={} 
+    for(let i=0;i<allQuestions.length;++i)
+        questsMap[allQuestions[i].qid]=allQuestions[i]
     let allLikedQuestionsNames=[]
     
     for(let i=0;i<allLikedQuestionsByThisUser.length;++i)
-        allLikedQuestionsNames.push( await quests.findOne({qid:allLikedQuestionsByThisUser[i].qid}) )
+           allLikedQuestionsNames.push(questsMap[allLikedQuestionsByThisUser[i].qid])
+        // allLikedQuestionsNames.push( await quests.findOne({qid:allLikedQuestionsByThisUser[i].qid}) )
     res.render('likedQuestions',{allLikedQuestions:allLikedQuestionsNames})
   
 }
