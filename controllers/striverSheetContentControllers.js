@@ -6,6 +6,16 @@ const Users = require('../models/users')
 const AcademicData = require('../models/academicdatas')
 const users = require('../models/users')
 
+async function setDefaultPortfolio()
+{
+    let allu = await AcademicData.updateMany(
+        {},
+        { $set: {"portfolio": "NA"} },
+    )
+
+}
+// setDefaultPortfolio()
+
 module.exports.striverSheet = async(req,res) =>{
     const q = await quests.find({})
     
@@ -290,6 +300,7 @@ module.exports.userAccount  = async (req,res) =>{
     let country="NA"
     let company="NA"
     let phone="NA"
+    let portfolio="NA"
 
     let currAcademicData = await AcademicData.findOne({email:email}) 
 
@@ -298,8 +309,9 @@ module.exports.userAccount  = async (req,res) =>{
          country=currAcademicData.country 
          company=currAcademicData.company 
          phone=currAcademicData.phone 
+         portfolio=currAcademicData.portfolio
     }
-    res.render('account',{name,email,password,college,country,company,phone})
+    res.render('account',{name,email,password,college,country,company,phone,portfolio})
 }
 
 module.exports.saveAcademicData = async (req,res)=>{
@@ -311,12 +323,12 @@ module.exports.saveAcademicData = async (req,res)=>{
 
     try{
 
-        let {country,company,college,phone}=req.body
+        let {country,company,college,phone,portfolio}=req.body
         
         let currAcademicData=await AcademicData.findOne({email:res.locals.user})
         if(!currAcademicData)
         {
-            await AcademicData.create({email:res.locals.user,country,company,college,phone})
+            await AcademicData.create({email:res.locals.user,country,company,college,phone,portfolio})
         }
         else
         {        
@@ -325,7 +337,7 @@ module.exports.saveAcademicData = async (req,res)=>{
                     email:res.locals.user
                 },
                 {
-                    "$set":{country,company,college,phone}
+                    "$set":{country,company,college,phone,portfolio}
                 }
             )
 

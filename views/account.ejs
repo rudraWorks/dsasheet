@@ -38,6 +38,7 @@
     <div class="accountData">
         <div><span>Name:</span><%= name %> </div>
         <div><span>Email:</span><%= email %></div>
+        <div><span>Portfolio:</span><a target="_blank" href="<%= portfolio %>"><%= portfolio %> </a><div><input id="portfolio" value="<%= portfolio %>"></div> </div>
         <div><span>Country:</span><%= country %> <div><input id="country" value="<%= country %>"></div> </div>
         <div><span>Company:</span><%= company %> <div><input id="company" value="<%= company %>"></div> </div>
         <div><span>College:</span><%= college %> <div><input id="college" value="<%= college %>"></div> </div>
@@ -72,6 +73,7 @@
             let company=document.getElementById('company').value.trim()
             let college=document.getElementById('college').value.trim()
             let phone=document.getElementById('phone').value.trim()
+            let portfolio=document.getElementById('portfolio').value.trim()
 
             if(country=="" || company =="" || college=="" || phone=="")
             return toastMessage("Input fields can not be empty!")
@@ -79,7 +81,7 @@
 
                 let data=await fetch('saveAcademicData',{
                     method:'POST',
-                    body:JSON.stringify({country,company,college,phone}),
+                    body:JSON.stringify({country,company,college,phone,portfolio}),
                     headers:{"Content-Type":"application/json"}
                 })
 

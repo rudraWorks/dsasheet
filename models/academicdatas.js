@@ -9,7 +9,8 @@ let schema = mongoose.Schema({
     college:String,
     company:String,
     country:String,
-    phone:String
+    phone:String,
+    portfolio:String,
     
 })
 
