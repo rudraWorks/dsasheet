@@ -337,6 +337,11 @@ module.exports.saveAcademicData = async (req,res)=>{
             return res.json({error:'Invalid portfolio url!'})
         }
 
+        if(!validator.isP)
+        {
+            return res.json({error:'Invalid portfolio url!'})
+        }
+
         let currAcademicData=await AcademicData.findOne({email:res.locals.user})
         if(!currAcademicData)
         {
