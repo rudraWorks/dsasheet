@@ -11,6 +11,7 @@ let schema = mongoose.Schema({
     country:String,
     phone:String,
     portfolio:String,
+    publicAccount:false,
     
 })
 

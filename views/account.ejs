@@ -25,12 +25,65 @@
     }
     .accountData>div>div>input{
         text-align: center;
+        width: 390px;
     }
     @media (max-width: 768px) {
         .accountData>div>div>input{
-            width: 90px;
+            width: 100px;
         }
     }
+
+        .switch {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 15px;
+    }
+
+    .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+    }
+
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+    .slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 20px;
+    left: 0px;
+    background-color: rgb(255, 255, 255);
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+    input:checked + .slider {
+    background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    }
+
+
 </style>
     <h1 style="text-align: center; margin: 40px;">Account Data 💾</h1>
     <a style="margin-left: 35px;" href="/striverSheet">back 👈</a>
@@ -38,7 +91,11 @@
     <div class="accountData">
         <div><span>Name:</span><%= name %> </div>
         <div><span>Email:</span><%= email %></div>
-        <div><span>Portfolio:</span><a target="_blank" href="<%= portfolio %>"><%= portfolio %> </a><div><input id="portfolio" value="<%= portfolio %>"></div> </div>
+        <div><span>Public Account?</span><div> <label class="switch">
+            <input type="checkbox"  id="publicAccount" <% if(publicAccount){ %> checked  <%} %>>
+            <span class="slider"></span>
+          </label></div> </div>
+        <div><span>Portfolio:</span><a target="_blank" href="<%= portfolio %>">link </a><div><input id="portfolio" value="<%= portfolio %>"></div> </div>
         <div><span>Country:</span><%= country %> <div><input id="country" value="<%= country %>"></div> </div>
         <div><span>Company:</span><%= company %> <div><input id="company" value="<%= company %>"></div> </div>
         <div><span>College:</span><%= college %> <div><input id="college" value="<%= college %>"></div> </div>
@@ -74,14 +131,15 @@
             let college=document.getElementById('college').value.trim()
             let phone=document.getElementById('phone').value.trim()
             let portfolio=document.getElementById('portfolio').value.trim()
+            let publicAccount=document.getElementById('publicAccount').checked
 
-            if(country=="" || company =="" || college=="" || phone=="")
+            if(country=="" || company =="" || college=="" || phone=="" || portfolio=="")
             return toastMessage("Input fields can not be empty!")
             try{
 
                 let data=await fetch('saveAcademicData',{
                     method:'POST',
-                    body:JSON.stringify({country,company,college,phone,portfolio}),
+                    body:JSON.stringify({country,company,college,phone,portfolio,publicAccount}),
                     headers:{"Content-Type":"application/json"}
                 })
 

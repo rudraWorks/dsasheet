@@ -25,6 +25,14 @@
     .leaderBoard>div>span{
         margin-right: 10px;
     }
+    .userData{
+        user-select: none;
+        cursor: pointer;
+    }
+    .userData:hover{
+        background-color: gray;
+        color:white;
+    }
 </style>
 
 <h1 style="text-align: center;margin-top: 30px;">Leaderboard 🏆</h1>
@@ -32,12 +40,50 @@
 <div class="leaderBoard">
 
     <% for(let i=0;i<usersAndNumberOfQuestionsTheySolved.length;++i) { %>
-    <div><%= usersAndNumberOfQuestionsTheySolved[i].userName %> &nbsp;&nbsp;&nbsp; <i> ( <%= usersAndNumberOfQuestionsTheySolved[i].college %> )</i> <span style="margin-left: auto;"> <%= usersAndNumberOfQuestionsTheySolved[i].questionsDoneByThisUser %>/185</span> <progress value="<%= usersAndNumberOfQuestionsTheySolved[i].percentageDone %>" max="100"></progress></div>
+    <div class="userData" onclick="showUserProfile(this)" id="<%= usersAndNumberOfQuestionsTheySolved[i].userId %>" ><%= usersAndNumberOfQuestionsTheySolved[i].userName %> &nbsp;&nbsp;&nbsp; <i> ( <%= usersAndNumberOfQuestionsTheySolved[i].college %> )</i> <span style="margin-left: auto;"> <%= usersAndNumberOfQuestionsTheySolved[i].questionsDoneByThisUser %>/185</span> <progress value="<%= usersAndNumberOfQuestionsTheySolved[i].percentageDone %>" max="100"></progress></div>
     <% } %>
 
 </div>
-     
+<script>
+     function toastMessage(message){
+        return Toastify({
+                        text:message,
+                        duration: 3000,
+                        // destination: "https://github.com/apvarun/toastify-js",
+                        newWindow: true,
+                        close: true,
+                        gravity: "top", // `top` or `bottom`
+                        position: "center", // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: {
+                            background:"linear-gradient(to right, #00b09b, #96c93d)",
+                        },
+                        onClick: function(){} // Callback after click
+                        }).showToast();
+    }
+
+    toastMessage("Leaderboard contains only those users who have completed more than 10 questions.")
+
+    const showUserProfile = (uid) =>{
+        uid=uid.getAttribute('id')
+        let userProfileForm = document.createElement('form')
+
+        let submitButton = document.createElement('button')
+        submitButton.setAttribute('type','submit')
+        userProfileForm.appendChild(submitButton)
+
+        let uidInput = document.createElement('input')
+        uidInput.setAttribute('name','uid')
+        uidInput.value=uid
+        userProfileForm.appendChild(uidInput)
+
+        userProfileForm.setAttribute('method','GET') 
+        userProfileForm.setAttribute('action','/user')
+        document.body.appendChild(userProfileForm)
+        submitButton.click()
+    }
+</script>
+
+
 <%- include('./partials/lower.ejs') %>
-
-
 

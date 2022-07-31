@@ -1,4 +1,4 @@
-function toastMessage(message){
+ function toastMessage(message){
     return Toastify({
                     text:message,
                     duration: 3000,
@@ -14,3 +14,5 @@ function toastMessage(message){
                     onClick: function(){} // Callback after click
                     }).showToast();
 }
+
+// module.exports = toastMessage

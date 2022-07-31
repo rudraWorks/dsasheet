@@ -5,17 +5,18 @@ const LikedQuestions = require('../models/likedquestions')
 const Users = require('../models/users')
 const AcademicData = require('../models/academicdatas')
 const users = require('../models/users')
+const validator = require('validator')
 
 async function setDefaultPortfolio()
 {
     let allu = await AcademicData.updateMany(
         {},
-        { $set: {"portfolio": "NA"} },
+        { $set: {"publicAccount": true} },
     )
 
 }
-// setDefaultPortfolio()
-
+// setDefaultPortfolio() 
+ 
 module.exports.striverSheet = async(req,res) =>{
     const q = await quests.find({})
     
@@ -265,9 +266,13 @@ module.exports.leaderboard = async (req,res) =>{
     for(let i=0;i<allUsers.length;++i)
     { 
         let userName = allUsers[i].name // correction by devIn
+        let userId = allUsers[i]._id
 
         // let questionsDoneByThisUser = (await CompletedQuestions.find({email:allUsers[i].email})).length 
         let questionsDoneByThisUser = completedQuestionsMap[allUsers[i].email]
+        // console.log(questionsDoneByThisUser)
+        if(questionsDoneByThisUser<=10 || !questionsDoneByThisUser)continue;
+
         if(!questionsDoneByThisUser)questionsDoneByThisUser=0
         // console.log(questionsDoneByThisUser)
         // let college = await AcademicData.findOne({email:allUsers[i].email})
@@ -276,7 +281,7 @@ module.exports.leaderboard = async (req,res) =>{
             college="NA"
         else
             college=college.college
-        usersAndNumberOfQuestionsTheySolved.push({userName,questionsDoneByThisUser,percentageDone: (100*questionsDoneByThisUser/185).toFixed(0),college})
+        usersAndNumberOfQuestionsTheySolved.push({userId,userName,questionsDoneByThisUser,percentageDone: (100*questionsDoneByThisUser/185).toFixed(0),college})
     }
 
     usersAndNumberOfQuestionsTheySolved=usersAndNumberOfQuestionsTheySolved.sort(myComp)
@@ -301,6 +306,7 @@ module.exports.userAccount  = async (req,res) =>{
     let company="NA"
     let phone="NA"
     let portfolio="NA"
+    let publicAccount=false
 
     let currAcademicData = await AcademicData.findOne({email:email}) 
 
@@ -310,8 +316,9 @@ module.exports.userAccount  = async (req,res) =>{
          company=currAcademicData.company 
          phone=currAcademicData.phone 
          portfolio=currAcademicData.portfolio
+         publicAccount=currAcademicData.publicAccount
     }
-    res.render('account',{name,email,password,college,country,company,phone,portfolio})
+    res.render('account',{name,email,password,college,country,company,phone,portfolio,publicAccount})
 }
 
 module.exports.saveAcademicData = async (req,res)=>{
@@ -323,12 +330,17 @@ module.exports.saveAcademicData = async (req,res)=>{
 
     try{
 
-        let {country,company,college,phone,portfolio}=req.body
-        
+        let {country,company,college,phone,portfolio,publicAccount}=req.body
+
+        if(!validator.isURL(portfolio))
+        {
+            return res.json({error:'Invalid portfolio url!'})
+        }
+
         let currAcademicData=await AcademicData.findOne({email:res.locals.user})
         if(!currAcademicData)
         {
-            await AcademicData.create({email:res.locals.user,country,company,college,phone,portfolio})
+            await AcademicData.create({email:res.locals.user,country,company,college,phone,portfolio,publicAccount})
         }
         else
         {        
@@ -337,7 +349,7 @@ module.exports.saveAcademicData = async (req,res)=>{
                     email:res.locals.user
                 },
                 {
-                    "$set":{country,company,college,phone,portfolio}
+                    "$set":{country,company,college,phone,portfolio,publicAccount}
                 }
             )
 

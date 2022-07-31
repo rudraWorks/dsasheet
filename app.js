@@ -13,7 +13,7 @@ mongoose.connect(DB,()=>{
 }) 
    
 const app = express() 
- 
+  
 app.set('view engine','ejs')
 
 app.use(express.json())
@@ -36,7 +36,9 @@ app.get('/',(req,res)=>{
     res.render('home')
 })
 
-
+app.get('*',(req,res)=>{
+    res.render('404')
+})
 
 const port = process.env.PORT || 3000
 app.listen(port,()=>{ 
