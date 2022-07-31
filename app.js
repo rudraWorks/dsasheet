@@ -5,7 +5,7 @@ const router = require('./routes/authRoutes')
 const {checkUser} = require('./middlewares/userAuth')
 const contentRouter = require('./routes/striverSheetContentRoutes')
 const generalRouter = require('./routes/generalRoutes')
-
+ 
 const DB = 'mongodb+srv://srudra754:test123@cluster0.zey6y.mongodb.net/smartstudy?retryWrites=true&w=majority'
 // const DB = 'mongodb://localhost:27017/dsasheets'
 mongoose.connect(DB,()=>{
