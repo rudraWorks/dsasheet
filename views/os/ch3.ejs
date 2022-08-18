@@ -44,7 +44,7 @@ states:
    <li><b>Terminated</b>. The process has finished execution.</li>
 </ol>
 <br>
-<img src="/osStyle/processStateDiagram.png"><br>
+<img src="https://lh3.googleusercontent.com/d/1ulTzyYHuOAASPiY7VaqTbeWU6ikftrul"><br>
 Fig. Process state diagram
 <br><br>
 
@@ -112,7 +112,7 @@ The OS maintains all PCBs in Process Scheduling Queues. The OS maintains a separ
     <li><b>Device queue</b>: The processes which are blocked due to unavailiblity of an I/O device constitue to this queue.</li>
 
     <br>
-    <img src="/osStyle/processScheduling.png"><br>
+    <img src="https://lh3.googleusercontent.com/d/1MLOTDXfADjS8nSu6Nr4td-75jG4SyqTB"><br>
     The OS can use different policies to manage each queue (FIFO, Round Robin, Priority, etc.). The OS scheduler determines how to move processes between the ready and run queues which can only have one entry per processor core on the system; in the above diagram, it has been merged with the CPU.
 </ul>
 
@@ -156,7 +156,7 @@ Effect on performance
 </ul>
 <br>
 The following image shows the scheduling of processes using the long-term and short-term schedulers.<br><br>
-<img src="/osStyle/longShortTermScheduler.png">
+<img src="https://lh3.googleusercontent.com/d/1B7BtYaeIud7UkhjOPFlydFRxov8FxJ8W">
 <br><br>
 <h5>Medium term scheduler</h5>
 Sometimes, you need to send the running process to the ready state or to the wait/block state. For example, in the round-robin process, after a fixed time quantum, the process is again sent to the ready state from the running state. So, these things are done with the help of Medium-Term schedulers.
@@ -168,9 +168,9 @@ It is helpful in maintaining a perfect balance between the I/O bound and the CPU
 <br>
 The following diagram will give a brief about the working of the medium-term schedulers.
 <br><br>
-<img src="/osStyle/mediumScheduler.png">
+<img src="https://lh3.googleusercontent.com/d/1cII6xgXOfKXB7in5uaFh-6jh5gmIXAM6">
 <br><br>
-<img src="/osStyle/schedulersComparison.png">
+<img src="https://lh3.googleusercontent.com/d/1dq_Ji0Sc7K9M9Fs95uGcxxnxrn6Fffkg">
 </p>
 
 
@@ -227,7 +227,7 @@ Each process is assigned a unique id known as <b>process id (PID).</b> It is an 
     <li>Generally, a process is identified and managed via a process identifier(pid).</li>
 </ul>
 <br>
-<img src="/osStyle/processTreeInLinux.png">
+<img src="https://lh3.googleusercontent.com/d/17BgP4Bv6dnU_BjMX6tpkctLwRc3clURX">
 <br>
 Fig. Process tree in Linux.
 <br><br>
@@ -264,22 +264,22 @@ There are also two address-space possibilities for the new process:
 <br><br>
 <i>Demonstration in Linux</i><br>
     
-   <img src="/osStyle/getpid.png">
+   <img src="https://lh3.googleusercontent.com/d/1pRm5YKJOkRK_7KxyxtGmV5Tk5yUX0Tja">
    <br>The above program will print the process id of the process that will print "Hello world!" on the console.
    <br><i>Output</i>: <pre style="background:gray;color: white;">Hello world!<br> PID=3423</pre>
    <br><br>
-   <img src="/osStyle/fork.png">
+   <img src="https://lh3.googleusercontent.com/d/1qbmmi2-RARC8Xl-vMUznkSsqjCfK4Wfw">
    <br>The above program will print the process id of the process that that will print "Hello world!" on the console, then the fork() system call will clone the current process have same contents but different process id.
    <br>
    <i>Output</i>: <pre style="background:gray;color: white;">Hello world!<br> PID=3423<br>Hello world!<br> PID=3424</pre>
     <br>
     <b><i>Can you guess how many times will "Hello world!" printed after the execution of the following program?</i></b>
     <br><br>
-    <img src="/osStyle/fork2.png">
+    <img src="https://lh3.googleusercontent.com/d/1GTxyazeO4sLP9KL6hSqG7ekwMVnGnxNU">
     <br><i>Output</i>: <pre style="background:gray;color: white;"><br>Hello world!<br> PID=3423<br>Hello world!<br> PID=4423<br>Hello world!<br> PID=3413<br>Hello world!<br> PID=3923<br>Hello world!<br> PID=3463<br>Hello world!<br> PID=3428<br>Hello world!<br> PID=3723<br>Hello world!<br> PID=3023</pre>
     
     <br>"Hello world!" is printed eight times.<br>
-    <img src="/osStyle/fork3.png">
+    <img src="https://lh3.googleusercontent.com/d/1YOZgjrQOnr45dJYD9h-1QH4MxfHH0tOv">
     <br>
     <br>
     <i><b style="background-color: yellow;">The number of times a program will execute = 2<sup>n</sup>, where n=number of fork() system calls in the program.</b></i><br><br>
@@ -370,7 +370,7 @@ Cooperating processes require an interprocess communication (IPC) mechanism that
     <li>Shared memory</li>
     <li>Message passing</li>
 </ol>
-<img src="/osStyle/communicationModels.png">
+<img src="https://lh3.googleusercontent.com/d/1udCJMWPCKpdKDhkoVVbvPU-YK41Dl4ww">
 <br><br>
 <h4>Shared Memory Systems</h4>
 Interprocess Communication using shared memory requires communcating processes to establish a region of shared memory.
