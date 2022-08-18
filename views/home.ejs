@@ -30,6 +30,14 @@
         background-repeat: no-repeat;
         height:100%;
     }
+    #imageGraph{
+      /* https://drive.google.com/file/d/175jkDNb8lHf_fknChAo6Gnz5M-ZJyU32/view?usp=sharing */
+      background-image: url('https://lh3.googleusercontent.com/d/175jkDNb8lHf_fknChAo6Gnz5M-ZJyU32');
+        background-size: contain;
+        background-color:rgb(255, 255, 255);
+        background-repeat: no-repeat;
+        height:100%;
+    }
     /* #cen{
         background-color: rgb(88, 137, 180);
     } */
@@ -98,10 +106,14 @@
             <div>Computer Networks</div>
             <div id="imageCN"></div>
         </div>
-        <div class="mainItems" onclick="toastMessage('Coming soon!')">
+        <div class="mainItems" onclick="location.href='/os'">
             <div>Operating Systems</div>
             <div id="imageOS"></div>
         </div>
+        <div class="mainItems" onclick="location.href='/graph'">
+          <div>Graph Theory Algorithms</div>
+          <div id="imageGraph"></div>
+      </div>
 
     </div>
 

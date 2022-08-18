@@ -1,13 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-const router = require('./routes/authRoutes')
+
+
 const {checkUser} = require('./middlewares/userAuth')
+const router = require('./routes/authRoutes')
 const contentRouter = require('./routes/striverSheetContentRoutes')
 const generalRouter = require('./routes/generalRoutes')
- 
-const DB = 'mongodb+srv://srudra754:test123@cluster0.zey6y.mongodb.net/smartstudy?retryWrites=true&w=majority'
-// const DB = 'mongodb://localhost:27017/dsasheets'
+const osRoutes = require('./routes/osRoutes')
+const graphRoutes = require('./routes/graphRoutes')
+
+
+// const DB = 'mongodb+srv://srudra754:test123@cluster0.zey6y.mongodb.net/smartstudy?retryWrites=true&w=majority'
+const DB = 'mongodb://localhost:27017/dsasheets'
 mongoose.connect(DB,()=>{
     console.log('connected to db')
 }) 
@@ -22,11 +27,14 @@ app.use(express.urlencoded({
     extended:true
 }))
 app.use(express.static(__dirname+"/public"))
+// app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use(checkUser)
 app.use(router) 
 app.use(generalRouter)
 app.use(contentRouter)
+app.use(osRoutes)
+app.use(graphRoutes)
 
 app.get('/',(req,res)=>{
 

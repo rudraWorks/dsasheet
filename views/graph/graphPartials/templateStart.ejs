@@ -1,0 +1,95 @@
+<%- include('../../partials/upper.ejs') %>
+<link rel="stylesheet" href="/graphStyle/style.css">
+
+
+
+<div id="graphContainer">
+    <div id="chapters">     
+
+        <h4 style="text-align: center; background-color: yellow;color: black;font-weight: 900;" >Chapters</h4>
+              <br>
+          <ol class="graphOl">
+                 <li onclick="location.href='/graph/ch1'">BFS on adjacency list</li><hr>
+                 <li onclick="location.href='/graph/ch2'">BFS on adjacency matrix</li><hr>
+                 <li onclick="location.href='/graph/ch3'">DFS on adjacency list</li><hr>
+                 <li onclick="location.href='/graph/ch4'">DFS on adjacency matrix</li><hr>
+                 <li onclick="location.href='/graph/ch5'">Cycle detection in undirected graph using BFS</li><hr>
+                 <li onclick="location.href='/graph/ch6'">Cycle detection in undirected graph using DFS</li><hr>
+                 <li onclick="location.href='/graph/ch7'">BFS bipartite graph coloring</li><hr>
+                 <li onclick="location.href='/graph/ch8'">DFS bipartite graph coloring</li><hr>
+                 <li onclick="location.href='/graph/ch9'">Cycle detection in directed graph using DFS</li><hr>
+                 <li onclick="location.href='/graph/ch10'">Topological sorting using DFS</li><hr>
+
+                 <li onclick="location.href='/graph/ch11'">Topological sorting using DFS</li><hr>
+                 <li onclick="location.href='/graph/ch12'">Topological sorting using BFS (Kahn's algorithm)</li><hr>
+                 <li onclick="location.href='/graph/ch13'">Cycle detection in directed graph using Kahn's algorithm</li><hr>
+                 <li onclick="location.href='/graph/ch14'">Shortest path in undirected unweighted graph</li><hr>
+                 <li onclick="location.href='/graph/ch15'">Shortest path in Directed acyclic graph (DAG)</li><hr>
+                 <li onclick="location.href='/graph/ch16'">Dijkstra's Algorithm for shortest path</li><hr>
+                 <li onclick="location.href='/graph/ch17'">Prim's Algorithm for MST</li><hr>
+                 <li onclick="location.href='/graph/ch18'">Kruskal's Algorithm for MST<hr>
+                 <li onclick="location.href='/graph/ch19'">Cut edges | Bridges using Tarjan's algorithm</li><hr>
+                 <li onclick="location.href='/graph/ch19'">Cut vertices | Articulation points</li><hr>
+                 <li onclick="location.href='/graph/ch19'">Kosaraju's algorithm for Strongly connected components</li><hr>
+
+        
+          </ol>
+    </div>
+    <div id="content">
+
+       <style>
+              img{
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto;
+                  width: 50%;
+                  max-height: 400px;
+              }
+          
+              
+              #gotoTopButton {
+              display: none;
+              position: fixed;
+              bottom: 20px;
+              right: 30px;
+              z-index: 99;
+              font-size: 18px;
+              border: none;
+              outline: none;
+              background-color: red;
+              color: white;
+              cursor: pointer;
+              padding: 15px;
+              border-radius: 4px;
+              }
+          
+              #gotoTopButton:hover {
+              background-color: #555;
+              }
+             
+          </style>
+          
+          <button onclick="topFunction()" id="gotoTopButton" title="Go to top">Top</button>
+          <script>
+              //Get the button
+              var mybutton = document.getElementById("gotoTopButton");
+              
+              // When the user scrolls down 20px from the top of the document, show the button
+              window.onscroll = function() {scrollFunction()};
+              
+              function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                  mybutton.style.display = "block";
+                } else {
+                  mybutton.style.display = "none";
+                }
+              }
+              
+              // When the user clicks on the button, scroll to the top of the document
+              function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+              }
+          </script>
+          
+
