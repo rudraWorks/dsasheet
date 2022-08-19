@@ -84,7 +84,7 @@ module.exports.ch20 = (req,res) =>{
     return res.render('graph/ch20')
 }
 
-module.exports.ch21 = (req,res) =>{
+module.exports.ch21 = (req,res) =>{ 
     return res.render('graph/ch21')
 }
 
