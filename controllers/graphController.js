@@ -89,7 +89,7 @@ module.exports.ch21 = (req,res) =>{
 }
 
 
-
+     
 module.exports.comingSoon = (req,res) =>{
     return res.render('graph/comingSoon')
 }
