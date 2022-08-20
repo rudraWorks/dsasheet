@@ -29,11 +29,8 @@
  @media (max-width: 768px) {
  
      #graphContainer{
-         grid-template-rows:.01fr 1fr 1fr 1fr 1fr 1fr;
+         grid-template-rows:.01fr 1fr 1fr;
          grid-template-areas:"a a a a a a a a a a a a"
-                             "b b b b b b b b b b b b"
-                             "b b b b b b b b b b b b"
-                             "b b b b b b b b b b b b"
                              "b b b b b b b b b b b b"
                              "b b b b b b b b b b b b";
      }

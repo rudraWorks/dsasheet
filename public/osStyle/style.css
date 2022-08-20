@@ -30,15 +30,15 @@
 @media (max-width: 768px) {
 
     #osContainer{
-        grid-template-rows:.01fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows:.01fr 1fr 1fr 1fr;
         grid-template-areas:"a a a a a a a a a a a a"
-                            "b b b b b b b b b b b b"
-                            "b b b b b b b b b b b b"
                             "b b b b b b b b b b b b"
                             "b b b b b b b b b b b b"
                             "b b b b b b b b b b b b";
     }
-   
+    .youtubeVid{
+        width: 90%;
+    }
   
 }
 
@@ -65,3 +65,4 @@ ol>hr{
 .osOl>li:hover{
     color: navy; 
 }
+
