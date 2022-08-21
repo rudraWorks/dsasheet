@@ -121,21 +121,5 @@
 <!-- <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div> -->
-<script>
-        function toastMessage(message){
-                return Toastify({
-                        text:message,
-                        duration: 3000,
-                        newWindow: true,
-                        close: true,
-                        gravity: "top", // `top` or `bottom`
-                        position: "center", // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                            style: {
-                            background:"linear-gradient(to right, #00b09b, #96c93d)",
-                        },
-                        onClick: function(){} // Callback after click
-                        }).showToast();
-                    }
-</script>
+
 <%- include('./partials/lower.ejs') %>

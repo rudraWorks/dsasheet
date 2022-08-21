@@ -296,20 +296,87 @@ The OS is responsible for the following activities in connection with process ma
     <li>Providing mechanism for deadlock handling.</li>
 </ol>
 
+<br>
+<h4>Memory Management</h4>
+A program is executed only when it is loaded inside the main memory.
+<br><br>
+Memory management activities:
+<ol>
+    <li>
+        Keeping track of which parts of memory are currently being used and by
+        whom.
+    </li>
+    <li>
+        Deciding which processes (or parts thereof) and data to move into and out
+of memory.
+    </li>
+    <li>
+        Allocating and deallocating memory space as needed.
+    </li>
+    <li>
+        Deciding which processes (or parts thereof) and data to move into and out
+of memory.
+    </li>
+    <li>
+        Allocating and deallocating memory space as needed.
+    </li>
+</ol>
 
+<br>
+<h4>Storage Management</h4>
+OS provides uniform, logical view of information storage.
+ It abstracts physical properties to logical storage unit called <i>file</i>. 
+ <br>
+ Files are stored in a number of different storage medium like:
+ <ul>
+     <li>Disk</li>
+     <li>Flash Memory</li>
+     <li>Tape</li>
+ </ul>
+Each medium is controlled by device drivers (ie, disk drive, tape drive). Varying properties include access speed, capcity, data-transfer rate, access method (sequential or random).
 
+<br><br>
+<h4>File System Management</h4>
+Files are usually organized into directories. 
+<br>OS activities include:
+<ul>
+    <li>Creating and deleting files and directories.</li>
+    <li>Primitives to manipulate files and directories.</li>
+    <li>Mapping files onto secondary storage.</li>
+    <li>Backup files onto stable (non-volatile) storage media.</li>
+</ul>
 
+<br>
+<h4>Caching</h4>
+<ul>
 
+    <li>There are many cases in which a smaller higher-speed storage space serves as a cache, or temporary storage, for some of the most frequently needed portions of larger slower storage areas.</li>
+    <li>
+        The hierarchy of memory storage ranges from CPU registers to hard drives and external storage. ( See table below. )
+    </li>
+    <li>
+        The OS is responsible for determining what information to store in what level of cache, and when to transfer data from one level to another.
+    </li>
+    <li>
+        The proper choice of cache management can have a profound impact on system performance.
+    </li>
+    <li>
+        Data read in from disk follows a migration path from the hard drive to main memory, then to the CPU cache, and finally to the registers before it can be used, while data being written follows the reverse path. Each step ( other than the registers ) will typically fetch more data than is immediately needed, and cache the excess in order to satisfy future requests faster. For writing, small amounts of data are frequently buffered until there is enough to fill an entire "block" on the next output device in the chain.
+    </li>
+    <li>
+        The issues get more complicated when multiple processes ( or worse multiple computers ) access common data, as it is important to ensure that every access reaches the most up-to-date copy of the cached data ( amongst several copies in different cache levels. )
+    </li>
+</ul>
+<br><br>
+<h4>Performance of various levels of storage</h4>
 
-
-
-
-
-
-
-
-
-
+<br>
+<img src="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_11_StoragePerformance.jpg" >
+<br>
+<br>
+<h4>Migration of data from disk to register</h4>
+<br>
+<img src="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_12_IntegerMigration.jpg">
 
 
 
