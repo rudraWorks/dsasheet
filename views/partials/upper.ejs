@@ -100,7 +100,9 @@
       margin-top: auto;
      
     }
-
+    a{
+      cursor: pointer;
+    }
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -124,7 +126,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                  <a class="nav-link" href="/">All Tracks🔥</a>
+                  <!-- <a class="nav-link" href="/">All Tracks🔥</a> -->
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent;" >
+                      All Tracks 🔥
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" onclick="location.href='/striverSheet'"  >Striver's DSA Sheet</a>
+                      <a class="dropdown-item" onclick="toastMessage('Coming soon!')">C++ Interview Questions</a>
+                      <a class="dropdown-item" onclick="toastMessage('Coming soon!')">Computer Networks</a>
+                      <a class="dropdown-item" onclick="location.href='/os'">Operating Systems</a>
+                      <a class="dropdown-item" onclick="location.href='/graph'">Grpah Theory Algorithms</a>
+                    </div>
+                  </div>
                 </li>
                 <li class="nav-item ">
                   <a class="nav-link" href="/about">About Us📃 </a>
