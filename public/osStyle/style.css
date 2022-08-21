@@ -19,12 +19,16 @@
     color: white;
     /* font-weight: 700; */
     user-select: none;
+
 }
 #content{
     grid-area: b;
     padding: 10px;
     background-color: lightgray;
-    background-image: url("https://img.freepik.com/free-photo/vintage-crumpled-paper-textured-background_53876-103940.jpg?w=740&t=st=1661060662~exp=1661061262~hmac=d3ba0b2efc6616ac3afdadbca00750cf5b753b27319577d65f7f66cc35b6c8dd");
+    /* background-image: url("https://img.freepik.com/free-photo/vintage-crumpled-paper-textured-background_53876-103940.jpg?w=740&t=st=1661060662~exp=1661061262~hmac=d3ba0b2efc6616ac3afdadbca00750cf5b753b27319577d65f7f66cc35b6c8dd"); */
+    background-color: rgb(255, 255, 128);;
+    background-image: url("https://cdn.pixabay.com/photo/2017/02/08/23/56/paper-2050768_960_720.jpg");
+
 
 }
 
