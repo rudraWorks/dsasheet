@@ -23,7 +23,9 @@
  #content{
      grid-area: b;
      padding: 10px;
-     background-color: antiquewhite;
+     background-color: lightgray;
+     background-image: url("https://img.freepik.com/free-photo/vintage-crumpled-paper-textured-background_53876-103940.jpg?w=740&t=st=1661060662~exp=1661061262~hmac=d3ba0b2efc6616ac3afdadbca00750cf5b753b27319577d65f7f66cc35b6c8dd");
+
  }
  
  @media (max-width: 768px) {
@@ -61,3 +63,12 @@
  .graphOl>li:hover{
      color: navy; 
  }
+
+ img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-height: 400px;
+}
+
