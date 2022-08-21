@@ -6,9 +6,13 @@ module.exports.osHome = (req,res) =>{
 }
 
 
-// module.exports.ch1 = (req,res) =>{
-//     return res.render('os/ch1');
-// }
+module.exports.ch1 = (req,res) =>{
+    return res.render('os/ch1');
+}
+
+module.exports.ch2 = (req,res) =>{
+    return res.render('os/ch2');
+}
 
 module.exports.ch3 = (req,res) =>{
     return res.render('os/ch3')
