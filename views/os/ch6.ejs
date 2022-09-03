@@ -111,6 +111,153 @@ response time, is the time it takes to start responding, not the time it takes
 to output the response. The turnaround time is generally limited by the
 speed of the output device.
 
+<br><br>
+<h3><b><u>Scheduling Algorithms</u></b></h3>
+<br>
+<h4>1. First-Come, First-Serve Scheduling (FCFS)</h4><br>
+
+<ul>
+    <li>It is the simplest CPU-scheduling algorithm.</li>
+    <li>The process that requests the CPU first is allocated the CPU first.</li>
+    <li>The implementation of the FCFS policy is easily managed with FIFO queue.</li>
+    <li>When a process enters the ready queue, its PCB is linked onto the tail of the queue.</li>
+    <li>When the CPU is free, it is allocated to the process at the head of the queue.</li>
+    <li>The running process is then removed from the queue.</li>
+    <li>Unfortunately, however, FCFS can yield some very long average wait times, particularly if the first process to get there takes a long time. For example, consider the following three processes:
+        <br>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Process</th>
+                <th scope="col">Burst Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>P1</td>
+                <td>24</td>
+              </tr>
+              <tr>
+                <td>P2</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>P3</td>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+    </li>
+    <li>In the first Gantt chart below, process P1 arrives first. The average waiting time for the three processes is ( 0 + 24 + 27 ) / 3 = 17.0 ms.</li>
+    <li>In the second Gantt chart below, the same three processes have an average wait time of ( 0 + 3 + 6 ) / 3 = 3.0 ms. The total run time for the three bursts is the same, but in the second case two of the three finish much quicker, and the other process is only delayed by a short amount.
+        <br><br><img src="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter6/6_FCFS_Chart1.jpg" alt="">
+        <br><br><img src="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter6/6_FCFS_Chart2.jpg" alt="">
+    <br></li>
+    <li>This reduction is substantial. Thus, the average waiting time under an FCFS policy is generally not minimal and may very substantially if the process's CPU burst time vary greatly.</li>
+    <li>The FCFS scheduling algorithm is <b>nonpreemptive.</b> <br>
+    Once the CPU has been allocated to a process, that process keeps the CPU until it releases the CPU, either by terminating or by requesting I/O.
+    </li>
+    <li>The FCFS algorithm is thus particularly troublesome for time-sharing systems, where it is important that each user get a share of the CPU at regular intervals.</li>
+    <li>It would be disastrous to allow one process to keep the CPU for an extended period. Therefore it is not an efficient algorithm.</li>
+    <li><b>Convoy Effect</b>: If processes with higher burst time arrived before the processes with smaller burst time, then, smaller processes have to wait for a long time for longer processes to release the CPU.</li>
+    <li>When two processes arrive at the same time then the process with the smaller process id will get the CPU first.</li>
+</ul>
+
+  <b style="border: 1px solid black; padding: 3px;">Turnaround time = Completion time - Arrival time</b> (from the time it first came to the ready queue till it completely finishes its execution).
+<br><br>
+<b style="border: 1px solid black; padding: 3px;">Waiting time = Turn around time - Burst time</b>
+ <br><br>
+ <h5>Problem 1</h5>
+<img src="https://lh3.googleusercontent.com/d/14qOzARPCoIJadxnTFaYuxOYNfE4G6tKU" alt="">
+
+
+<br><br>
+<img src="https://lh3.googleusercontent.com/d/1WNGCCY45WEczq3m-7WMooKX_e2z008xR" alt="">
+
+<br><br>
+<img src="https://lh3.googleusercontent.com/d/1JCPRKrBi7hOiZkoegyVcyOc39SBabki-" alt="">
+
+<br><br>
+<h5>Problem 2</h5>
+<center><iframe class="youtubeVid" width="654" height="409" src="https://www.youtube.com/embed/8-BUGte27sk?list=PLBlnK6fEyqRitWSE_AyyySWfhRgyA-rHk" title="First Come First Served Scheduling (Solved Problem 2)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+
+<br><br>
+<h4>2. Shortest-Job-First Scheduling</h4>
+<br>
+<ul>
+    <li>This algorithm associates with each process the length of the process's next CPU burst.</li>
+    <li>When the CPU is available, it is assigned to the process that has the smallest next CPU burst.</li>
+    <li>If the next CPU burst of two processes are the same, FCFS scheduling is used to break the tie.</li>
+    <li>The SJFS algorithm can be either <b>preemptive</b> or <b>nonpreemptive</b>.</li>
+    <li>Non Preemptive SJFS
+      <img src="https://lh3.googleusercontent.com/d/1SoI7q-Pws7587OxSS2Yfe4oEkZmWry8D" alt="">
+    </li>
+    <li>
+      Preemptive SJFS 
+      <img src="https://lh3.googleusercontent.com/d/1xapr0S54bHsdww3ywiFmTWQNzhGUlRk0" alt="">
+    </li>
+    <li>
+      <b>Waiting Time = Total waiting time - No. of milliseconds process executed - arrival time</b>
+      <img src="https://lh3.googleusercontent.com/d/1YbtvY9wFr_3ShHPOLnmvdagdUeYeW3wv" alt="">
+    </li>
+    <li>Preemptive SJFS is sometimes called Shortest Remaining Time First Scheduling.</li>
+</ul>
+
+<h5>Problems with SJFS</h5>
+<ul>
+  <li>The real difficulty with the SJFS algorithm is knowing the length of the next CPU request.</li>
+  <li>Although the SJFS algorithm is optimal, it cannot be implemented at the level of short-term CPU scheduling.</li>
+  <li>There is no way to know the length of the next CPU burst.</li>
+</ul>
+<h5>Problem 1</h5>
+<center><iframe  class="youtubeVid" width="654" height="409"  src="https://www.youtube.com/embed/lpM14aWgl3Q?list=PLBlnK6fEyqRitWSE_AyyySWfhRgyA-rHk" title="Shortest Job First Scheduling (Solved Problem 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center> 
+<br>
+<h5>Problem 2</h5>
+<center><iframe class="youtubeVid" width="654" height="409"  src="https://www.youtube.com/embed/ypOnf9mnFYg?list=PLBlnK6fEyqRitWSE_AyyySWfhRgyA-rHk" title="Shortest Job First Scheduling (Solved Problem 2)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+
+
+<br><br>
+<h4>3. Priority Scheduling</h4>
+
+<ul>
+  <li>A priority is associated with each process, and the CPU is allocated to the process with the highest priority.</li>
+  <li>Equal-priority processes are scheduled in FCFS order.</li>
+  <li>An SJFS is simply a priority algorithm where the priority is the inverse of the (predicted) next CPU burst. <br> The larger the CPU burst, the lower the priority, and vice versa.</li>
+  <li>Priority scheduling can be either preemptive or non preemptive.</li>
+  <li>A preemptive priority scheduling algorithm will preempt the CPU if the priority of the newly arrived process is higher than the priority of the currently running process.</li>
+  <li>A nonpreemptive priority scheduling algorithm will simply put the new process at the head of the ready queue.</li>
+  <li>
+    <img src="https://lh3.googleusercontent.com/d/1YRZWMzSZIHnKG8FQlZ6kDgttyfpV-b-_" alt="">
+  </li>
+</ul>
+<h5>Problems with Priority Scheduling</h5>
+<ul>
+  <li>A major problem with priority scheduling is <b>indefinite blocking</b> or <b>starvation</b>.</li>
+  <li>A process that is ready to run but waiting for the CPU can be considered blocked.</li>
+  <li>A priority scheduling algorithm can leave some low priority processes waiting indefinitely.</li>
+  <li>In a heavily loaded computer system, a steady stream of higher-priority processes can prevent a low-priority process from ever getting the CPU.</li>
+</ul>
+
+<h5>Solution</h5>
+<ul>
+  <li> A solution to the problem of indefinite blockage of low-priority processes is <b>aging</b>.</li>
+<li>Aging is a technique of gradually increasing the priority of processes that wait in the system for a long time.</li>
+<li>
+  For example:
+  <br>
+  If priorities range from 127(low) to 0(high), we could increase the priority of a waiting process by 1 every 15 minutes. Eventually, even a process with an initial priority of 127 would have the highest priority in the system and would be executed.
+</li>
+
+
+</ul>
+
+
+
+
+
+
+
+
 
 
 
