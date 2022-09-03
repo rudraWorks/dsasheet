@@ -18,6 +18,13 @@ module.exports.ch3 = (req,res) =>{
     return res.render('os/ch3')
 }
 
+module.exports.ch4 = (req,res) =>{
+    return res.render('os/ch4')
+}
+
+module.exports.ch6 = (req,res) =>{
+    return res.render('os/ch6')
+}
 module.exports.comingSoon = (req,res) =>{
     return res.render('os/comingSoon')
 }

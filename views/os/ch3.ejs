@@ -412,30 +412,197 @@ A message passing facilty provides atleast two operations:
     <li>send(message)</li>
     <li>receive(message)</li>
 </ol>
+Messages sent by a process can be of either <b>fixed</b> or <b>variable size</b>. 
+<ul>
+    <li> <b>Fixed size</b>: The system-level implementation is straightforward. But makes the task of programming more difficult.</li>
+    <li><b>Variable size</b>: Requires a more complex system-level implementation. But the programming task becomes simpler.</li>
+</ul>
+<br>
+If processes P and Q wish to communicate, they need to:
+<ul>
+    <li>establish a <b>communication link</b> between them.</li>
+    <li>exchange messages via send/receive.</li>
+</ul>
+
+Implementation issues:
+<ul>
+    <li>how are links established?</li>
+    <li>can a link be associated with more than two processes?</li>
+    <li>how many links can be there between every pair of communicating processes?</li>
+    <li>what is the capacity of a link?</li>
+    <li>is the size of a message that the link can accomodate fixed or variable?</li>
+    <li>is a link unidirectional or bi-direcitional?</li>
+</ul>
+
+Implementation of communication link:
+<ul>
+    <li><b>Physical</b>
+        <ul>
+            <li>Shared memory</li>
+            <li>Hardware bus</li>
+            <li>Network</li>
+        </ul>
+    </li>
+    <li>
+        <b>Logical</b>
+        <ul>
+            <li>Direct or indirect</li>
+            <li>Synchronous or asynchronous</li>
+            <li>Automatic or explicit buffering</li>
+        </ul>
+    </li>
+</ul>
+<h4>Direct Communication</h4>
+<ol>
+    <li>
+        Processes must name each other explicitly:
+        <ul>
+            <li><b>send(p,message)</b> - send a message to process p</li>
+            <li><b>receive(q,message)</b> - receive a message from process q</li>
+        </ul>
+    </li>
+    <li>
+        Properties of communication link:
+        <ul>
+            <li>Links are established automatically.</li>
+            <li>A link is associated with exactly one pair of communicating process.</li>
+            <li>Between each pair there exist one link.</li>
+            <li>The link may be unidirectional, but is usually bi-directional.</li>
+        </ul>
+    </li>
+</ol>
+
+<h4>Indirect Communication</h4>
+<ol>
+    <li>
+        Messages are directed and received from mailboxes (also referred to as ports)
+        <ul>
+            <li>Each mailbox has an unique id.</li>
+            <li>Processes can communicate only if they share a mailbox.</li>
+        </ul>
+    </li>
+    <li>
+        Operations
+        <ul>
+            <li>Create a new mailbox(port)</li>
+            <li>send and receive messages through mailbox</li>
+            <li>delete mailbox</li>
+        </ul>
+    </li>
+    <li>
+        Primitives are defined as:
+        <ul>
+            <li><b>send(A,message)</b> - send a message to mailbox A</li>
+            <li><b>receive(A,message)</b> - receive a message from mailbox A</li>
+        </ul>
+    </li>
+    <li>
+        Properties of communication link 
+        <ul>
+            <li>Link is established only if processes share a common mailbox</li>
+            <li>A link may be associated with many processes</li>
+            <li>Each pair of processes may share several communication links</li>
+            <li>Link may be unidirectional or bi-directional</li>
+        </ul>
+    </li>
+</ol>
+
+<h4>Indirect Communication Issues</h4>
+<ol>
+    <li>
+        Mailbox sharing 
+        <ul>
+            <li>P1, P2 and P3 share mailbox A</li>
+            <li>P1 sends; P2 and P3 receive</li>
+            <li>Who gets the message?</li>
+        </ul>
+    </li>
+    <li>
+        Solutions
+        <ul>
+            <li>Allow a link to be associated with at most two processes</li>
+            <li>Allow only one process at a time to execute a receive operation </li>
+            <li>Allow the system to select arbitrarily the receiver. Sender is notified who the receiver was.</li>
+        </ul>
+    </li>
+</ol>
+
+<h4>Blocking and Non-blocking Schemes</h4>
+<ul>
+    <li>
+        Message passing may be either blocking or non-blocking.
+    </li>
+    <li><b>Blocking</b> is considered <b>synchronous</b>
+        <ul>
+            <li>Blocking send - the sender is blocked until the message is received</li>
+            <li>Blocking receive - the receive is blocked until a message is available</li>
+        </ul>
+    </li>
+    <li>
+        Non-blocking is considered asynchronous
+        <ul>
+            <li>
+                Non-blocking send - the sender sends the message and continue 
+            </li>
+            <li>
+                Non-blocking receive - the receiver receives a valid message or NULL message.
+            </li>
+        </ul>
+    </li>
+
+</ul>
+
+<h3><b><u>Pipes</u></b></h3>
+A pipe acts as a conduit allowing two processes to communicate.
+
+<br><br>
+Four issues must be considered while implementing a pipe:
+<ol>
+    <li>Unidirectional or Bidirectional communication?</li>
+    <li>Is bidirectional communication half-duplex or full-duplex?</li>
+    <li>Must a relationship such as parent-child exist between the processes?</li>
+    <li>Can pipes communicate over a network, or only on the same machine?</li>
+</ol>
+
+There are two types of pipes:
+<br><br>
+<h4>Ordinary Pipes</h4>
+<ul>
+    <li>Ordinary pipes allow two processes to communicate in standard producer-consumer style.</li>
+    <li>Producer writes to one end (the write‐end of the pipe)</li>
+    <li>Consumer reads from the other end (the read‐end of the
+        pipe)</li>
+    <li>Ordinary pipes are unidirectional, allowing only one‐way
+        communication.</li>
+    <li>If two‐way communication is required, two pipes must be
+        used, with each pipe sending data in a different direction.</li>
+    <li>Require parent‐child relationship between communicating
+        processes</li>
+
+</ul>
+
+     On UNIX systems, ordinary pipes are constructed using the function: pipe(int fd[])
+        <br>
+        This function creates a pipe that is accessed through the int fd[] file descriptors:
+        <br>
+        fd[0] is the read-end of the pipe<br>
+        fd[1] is the write-end of the pipe<br>
+        UNIX treats a pipe as a special type of file. Thus, pipes can be accessed using ordinary read() and write() system calls.
+        <br><br>
+        <img src="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter3/3_22_PipeFileDescriptors.jpg">
+
+<br><br><a href="https://www.geeksforgeeks.org/pipe-system-call/">Pipes gfg</a>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<br><br>
+<h4>Named Pipes</h4>
+<ul>
+    <li>Named pipes are more powerful than ordinary pipes</li>
+    <li>Communication is bidirectional</li>
+    <li>No parent-child relationship is necessary between the communcating processes</li>
+    <li>several processes can use the named pipe for communication</li>
+    <li>Provided on both UNIX and Windows systems</li>
+</ul>
 
 
 

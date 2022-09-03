@@ -1,0 +1,125 @@
+<%- include('./osPartials/templateStart') %>
+
+<h1 style=" text-align:center; font-size: 40px;font-weight: 900;">CPU Scheduling</h1><hr>
+
+CPU scheduling is the basis of multiprogramming operating systems. <br>
+By switching the CPU among processes, the operating system can make the computer more productive.
+ <br><br>
+<h4>Topics to be covered</h4>
+<ol>
+    <li>To introduce CPU scheduling, which is the basis for multiprogramming operating systems.</li>
+    <li>To describe various CPU-scheduling algorithms.</li>
+</ol>
+
+
+ In a single-processor system, only one process can run at a time. Any others must wait until the CPU is free and can be rescheduled. 
+ <br>
+ <ul>
+     <li>
+         The objective of multiprogramming is to have some process running at all times, to maximize CPU utilization.
+     </li>
+     <li>
+        A process is executed until it must wait, typically for the completion of some I/O request.
+     </li>
+     <li>The main motive of CPU scheduling is that it must not remain idle. Some process must utilize the CPU time.</li>
+     <li>With multiprogramming, we try to use this time productively.</li>
+     <li>
+         Several processes are kept in memory at one time.
+     </li>
+     <li>When one process has to wait, the operating system takes the CPU away from that process and gives the CPU to another process and this pattern continues.</li>
+ </ul>
+  
+<br>
+<h3><b><u>CPU and I/O Burst Cycles</u></b></h3>
+
+Process execution consists of a cycle of <b>CPU execution</b> and <b>I/O wait</b>. Processes alternate between these two states.
+<br><br>
+<b>CPU burst</b>: When the process is under CPU execution, we say that there is a CPU burst.
+<br><br>
+<b>I/O burst</b>: When the process is waiting for some I/O operation to be complete, then we say that the process is under I/O burst.
+<br><br> Processes execution starts with a CPU burst. Eventually, final CPU burst end with a system request to terminate execution.
+<br><br>
+<img src="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter6/6_01_CPU_BurstCycle.jpg" alt="">
+
+<br><br>
+
+<h3><b><u>Preemptive and Non-preemptive Scheduling</u></b></h3>
+<b>
+    CPU Scheduler:</b> Whenever the CPU becomes idle, the OS must select one of the processes in the ready queue to be executed. The selection process is carried out by the short-term scheduler or CPU scheduler. The scheduler selects a process from the processes in memory that are ready to execute and allocates the CPU to that process.
+
+<br><br>
+<b>Dispatcher</b>: The dispatcher is the module that gives control of the CPU to the process selected by the short-term scheduler. The time it takes for the dispatcher to stop one process and start another running is known as <b>dispatch latency.</b> <br>For an efficient system, dispatch latency should be minimum.
+
+<br><br>
+
+<h4>CPU-scheduling decisions may take place under the following four circumstances.</h4>
+<ol>
+    <li>When a process switches from the running state to the waiting state (for example, waiting for an I/O).</li>
+    <li>
+        When a process switches from the running state to the ready state (for example, when an interrupt occurs).
+    </li>
+    <li>
+        When a process switches from the waiting state to the ready state (for example, at completion of I/O).
+    </li>
+    <li>When a process terminates.</li>
+</ol>
+
+For <b>situations 1 and 4</b>, there is no choice in terms of scheduling, a new process (if one exists in the ready queue) must be selected for execution. However, there is a choice for <b>situations 2 and 3</b>.
+
+<br><br>
+<b>Non-Preemptive or Cooperative Scheduling</b>: When scheduling takes place only under circumstances 1 and 4. <br> In other words, a process is not disturbed or not got its CPU-hold off until it is completed or it gets into waiting state.
+<br><br>
+<b>Preemptive Scheduling</b>: When scheduling takes place only under circumstances 2 and 3. <br>
+<br>There may be scenerios when there is a process being executed, there is a very high priority process that has to be executed. That time we need to stop the exeuction of the current one and execute that high priority process. At that time preemptive scheduling will be required.
+<br>There are drawbacks of preemptive scheduling. For example in case of shared memory. So let's say that there is a shared region of memory into which different processes has access and different processes can write and read from that shared region of memory, so let's say that we are following this preemptive scheduling and one process was writing something into the shared memory, and another process came then the first process had to be preempted, that means the first process was halted and then the CPU was given to the second process now the second process when in reads from that memory into which the first process was
+just writing and did not complete what it was writing so
+that the second process is going to read some inconsistent data because the first process that was doing the writing job did not complete what it was doing. So these are some of the problems with preemptive scheduling.
+
+<br><br>
+<h3><b><u>Scheduling Criteria</u></b></h3>
+
+There are some criteria on which scheduling depends.
+<ol>
+    <li>CPU utilization</li>
+    <li>Thoughput</li>
+    <li>Turnaround time</li>
+    <li>Waiting time</li>
+    <li>Response time</li>
+</ol>
+
+
+<h4>1. CPU utilization</h4>
+We want to keep the CPU as busy as possible. Conceptually, CPU utilization can range from 0 to 100 percent. In a real system, it should range from 40 percent (for a lightly loaded system) to 90 percent (for a heavily used system). We don' want CPU to remain idle.
+<br><br>
+
+<h4>2. Throughput</h4>
+If the CPU is busy executing processes, then work is being done. One measure of work is the number of processes that are completed per unit time, called throughput.
+<br><br>
+<h4>3. Turnaround time</h4>
+From the point of view of a particular process, the important criterion is how long it takes to execute that process. The interval from the time of submission of a process to the time of completion is the turnaround time. Turnaround time is the sum of the periods spend waiting to get into memory, waiting in the ready queue, executing on the CPU, and doing I/O.
+<br><br>
+<h4>4. Waiting time</h4>
+Waiting time is the sum of the periods spent waiting in the ready queue. <br>
+The CPU scheduling algorithm does not affect the amount of time during which a process executes so does IO. When we talk about CPU scheduling what does scheduling do? Scheduling means the scheduler is assigning the CPU to different processes so once the process get the CPU the time it executes in the CPU or the time it takes in performing input/output operations does not depend upon the scheduler. Because the time a process will spend in the CPU or the time it will take to perform an I/O will depend upon the process not the scheduler. But what the scheduler is concerned is how fast or how frequently can I assign the CPU to a process in the ready queue. So if a process is taking a lot of time in the waiting state waiting to get the CPU and if the scheduler is not able to assign the CPU to that process, then it will take a lot of time waiting for the CPU. The process will starve for the CPU. 
+<br><br>
+<h4>5. Response time</h4>
+In an interactive system, turnaround time may not be
+the best criterion. Often, a process can produce some output fairly early
+and can continue computing new results while previous results are being output to the user. Thus, another measure is the time from the submission
+of a request until the first response is produced. This measure, called
+response time, is the time it takes to start responding, not the time it takes
+to output the response. The turnaround time is generally limited by the
+speed of the output device.
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('./osPartials/templateEnd') %>
