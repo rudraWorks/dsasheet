@@ -22,6 +22,10 @@ module.exports.ch4 = (req,res) =>{
     return res.render('os/ch4')
 }
 
+module.exports.ch5 = (req,res) =>{
+    return res.render('os/ch5')
+}
+
 module.exports.ch6 = (req,res) =>{
     return res.render('os/ch6')
 }

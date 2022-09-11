@@ -77,3 +77,9 @@ img{
     width: 50%;
     max-height: 400px;
 }
+
+.formula{
+    border: 1px solid black;
+    padding: 3px;
+    background-color: lightyellow;
+}

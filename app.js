@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-
+ 
 
 const {checkUser} = require('./middlewares/userAuth')
 const router = require('./routes/authRoutes')
@@ -27,7 +27,6 @@ app.use(express.urlencoded({
     extended:true
 }))
 app.use(express.static(__dirname+"/public"))
-// app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use(checkUser)
 app.use(router) 
