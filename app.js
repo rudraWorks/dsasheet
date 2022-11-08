@@ -8,7 +8,7 @@ const router = require('./routes/authRoutes')
 const contentRouter = require('./routes/striverSheetContentRoutes')
 const generalRouter = require('./routes/generalRoutes') 
 const osRoutes = require('./routes/osRoutes')
-const graphRoutes = require('./routes/graphRoutes')
+const graphRoutes = require('./routes/graphRoutes') 
 
 
 
