@@ -11,15 +11,16 @@ const osRoutes = require('./routes/osRoutes')
 const graphRoutes = require('./routes/graphRoutes') 
 
 
-
+ 
 // const DB = 'mongodb://localhost:27017/dsasheets'
-const DB = 'mongodb+srv://srudra754:test123@cluster0.zey6y.mongodb.net/smartstudy?retryWrites=true&w=majority'
+require('dotenv').config()
+const DB = process.env.DB
 mongoose.connect(DB,()=>{
     console.log('connected to db')
 }) 
    
 const app = express() 
-  
+   
 app.set('view engine','ejs')
 
 app.use(express.json())
